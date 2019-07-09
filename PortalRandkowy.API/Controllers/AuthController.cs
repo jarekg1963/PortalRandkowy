@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PortalRandkowy.API.Data;
+using PortalRandkowy.API.Dtos;
 using PortalRandkowy.API.Models;
 
 namespace PortalRandkowy.API.Controllers 
@@ -14,17 +15,17 @@ namespace PortalRandkowy.API.Controllers
 
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            username = username.ToLower();
-            if (await _repository.UserExist(username))
+            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            if (await _repository.UserExist(userForRegisterDto.Username))
             return BadRequest("Uzykowsnik o takiej nazwie istenieje");
 
             var userToCreate = new User
             {
-                Username = username 
+                Username = userForRegisterDto.Username 
             };
-            var createdUser = await _repository.Register(userToCreate, password);
+            var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
         }
