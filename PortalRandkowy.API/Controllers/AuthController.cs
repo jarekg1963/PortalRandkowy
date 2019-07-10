@@ -72,5 +72,4 @@ namespace PortalRandkowy.API.Controllers {
         }
     }
 
-    internal class Encoding { }
 }
