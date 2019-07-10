@@ -9,5 +9,8 @@ namespace PortalRandkowy.API.Dtos
         [Required(ErrorMessage="Hasło uzytkownika jest wymagane")]
         [StringLength(12, MinimumLength=6 , ErrorMessage="Hasło musi mieć 4 - 8 znaków")]
         public string  Password { get; set; }
+
+
+     
     }
 }
