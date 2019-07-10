@@ -17,6 +17,9 @@ namespace PortalRandkowy.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            // if (!ModelState.IsValid)
+            // return BadRequest(ModelState);
+
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             if (await _repository.UserExist(userForRegisterDto.Username))
             return BadRequest("Uzykowsnik o takiej nazwie istenieje");
