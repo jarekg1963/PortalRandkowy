@@ -1,3 +1,4 @@
+import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -18,7 +19,9 @@ import { FormsModule } from '@angular/forms';
       HttpClientModule,
       FormsModule
    ],
-   providers: [],
+   providers: [
+     AuthService
+   ],
    bootstrap: [
       AppComponent
    ]
