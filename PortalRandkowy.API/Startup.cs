@@ -63,7 +63,7 @@ namespace PortalRandkowy.API
 
         app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         app.UseAuthentication();
-            app.UseMvc();  // ta linia musi być na koncu . Korzystamy z routingu na atrybutach . 
+        app.UseMvc();  // ta linia musi być na koncu . Korzystamy z routingu na atrybutach . 
         }
     }
 }

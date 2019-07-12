@@ -41,6 +41,10 @@ namespace PortalRandkowy.API.Controllers {
 
         [HttpPost ("login")]
         public async Task<IActionResult> Login (UserForLoginDto userForLoginDto) {
+            Console.WriteLine("  --------------------------------------------------------");
+            Console.WriteLine("Logujemy się");
+            Console.WriteLine($"user: {userForLoginDto.Username} {userForLoginDto.password}");
+            Console.WriteLine("  --------------------------------------------------------");
             var userFromRepo = await _repository.Login (userForLoginDto.Username.ToLower (), userForLoginDto.password);
 
             if (userFromRepo == null)
