@@ -23,10 +23,10 @@ namespace PortalRandkowy.API.Data {
         return user;
         }
 
-        public async Task<User> Register (User user, string password) 
+        public async Task<User> Register (User user, string Password) 
         {
             byte[] passwordHash, passwordSalt;
-            CreatePasswordHashSalt(password,out passwordHash,out passwordSalt);
+            CreatePasswordHashSalt(Password,out passwordHash,out passwordSalt);
        
        user.PasswordHash = passwordHash;
        user.PasswordSalt = passwordSalt;

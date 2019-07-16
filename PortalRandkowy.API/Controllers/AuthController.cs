@@ -25,9 +25,14 @@ namespace PortalRandkowy.API.Controllers {
         }
 
         [HttpPost ("register")]
-        public async Task<IActionResult> Register (UserForRegisterDto userForRegisterDto) {
+        public async Task<IActionResult> register(UserForRegisterDto userForRegisterDto) {
 
+               Console.WriteLine("--------controler---------------------------------------------------------------------------------");
+               Console.WriteLine(userForRegisterDto.Password);
+               Console.WriteLine(userForRegisterDto.Username);
+               Console.WriteLine("-----------------------------------------------------------------------------------------");
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower ();
+        
             if (await _repository.UserExist (userForRegisterDto.Username))
                 return BadRequest ("Uzykowsnik o takiej nazwie istenieje");
 
@@ -41,7 +46,6 @@ namespace PortalRandkowy.API.Controllers {
 
         [HttpPost ("login")]
         public async Task<IActionResult> Login (UserForLoginDto userForLoginDto) {
-       
             var userFromRepo = await _repository.Login (userForLoginDto.Username.ToLower (), userForLoginDto.password);
 
             if (userFromRepo == null)

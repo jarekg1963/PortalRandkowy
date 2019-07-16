@@ -17,8 +17,7 @@ decodedToken: any;
 constructor(private http: HttpClient) { }
 
 login(model: any) {
-
-  return this.http.post(this.baseUrl + 'login', model)
+ return this.http.post(this.baseUrl + 'login', model)
     .pipe(map((response: any) => {
       const user = response;
       if (user) {
@@ -29,4 +28,10 @@ login(model: any) {
     })
     );
 }
+
+registeracja(model: any) {
+
+  return this.http.post('http://localhost:5000/api/auth/register', model);
+}
+
 }
