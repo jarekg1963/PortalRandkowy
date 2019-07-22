@@ -7,22 +7,30 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-
+import { ConfirmationDialogComponent } from './alerty/confirmation-dialog/confirmation-dialog.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogService } from './alerty/confirmation-dialog.service';
+import { AlertDialogComponent } from './alerty/alert-dialog/alert-dialog.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      ConfirmationDialogComponent,
+      AlertDialogComponent
    ],
+   entryComponents: [ConfirmationDialogComponent,  AlertDialogComponent],
    imports: [
       BrowserModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      NgbModule, NgbPaginationModule, NgbAlertModule
    ],
    providers: [
-      AuthService
+      AuthService, ConfirmationDialogService
    ],
    bootstrap: [
       AppComponent

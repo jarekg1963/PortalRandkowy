@@ -1,4 +1,4 @@
-<form #registerForm="ngForm" (ngSubmit)="register()">
+<form #registerForm="ngForm" (ngSubmit)="pytajOzapis()">
   <h2 class="text-center text-primary">Zapisz się </h2>
   <hr>
   <div clas="form-group">
@@ -7,14 +7,14 @@
   <div clas="form-group">
     <input type="password" class="form-control" placeholder="Hasło" required name='Password' [(ngModel)]= 'model.Password'>
   </div>
-  <div>
-  <div class="form-group">
+
+  <!-- <div class="form-group">
     <label for="favoriteValue"> Jaka jest ..........</label>
     <select class="form-control" id="favoriteValue">
     <option *ngFor="let value of valuesFromHome" [value]="value">{{ value.name}}</option>
   </select>
-  </div>
-  </div>
+  </div> -->
+
   <div class="form-group text-center">
     <button class="btn btn-success" type="submit">Rejestracja</button>
     <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>

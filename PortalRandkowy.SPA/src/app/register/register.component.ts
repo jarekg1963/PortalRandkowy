@@ -1,5 +1,10 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ConfirmationDialogService } from '../alerty/confirmation-dialog.service';
+
+
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-register',
@@ -12,19 +17,32 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
 
   }
 
 
-  register() {
+  pytajOzapis() {
+    this.confirmationDialogService.confirm('','Czy jesteś pewien ? ', 'OK', 'Rezygnacja')
+    .then((confirmed) => this.register(confirmed))
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+
+
+
+  register(dd: boolean) {
+    console.log(dd);
+    if (dd) {
     this.authService.registeracja(this.model).subscribe(() => {
-      console.log('rejestracja udana');
+      this.confirmationDialogService.alertOkno('OK', 'Zapisano  ', '   OK   ');
     }, error => {
-      console.log('wystąpił błąd rejestracji');
+      this.confirmationDialogService.alertOkno('Uwaga ', ' Błąd zapisu  ', '    OK    ');
     });
+  }
   }
 
 
