@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from './alerty/confirmation-dialog.service';
 import { AlertDialogComponent } from './alerty/alert-dialog/alert-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
    declarations: [
@@ -20,17 +23,24 @@ import { AlertDialogComponent } from './alerty/alert-dialog/alert-dialog.compone
       HomeComponent,
       RegisterComponent,
       ConfirmationDialogComponent,
-      AlertDialogComponent
+      AlertDialogComponent,
    ],
    entryComponents: [ConfirmationDialogComponent,  AlertDialogComponent],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      NgbModule, NgbPaginationModule, NgbAlertModule
+      NgbModule, NgbPaginationModule, NgbAlertModule,
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(
+        {
+          timeOut: 1000,
+          positionClass: 'toast-bottom-right'
+        }
+      )
    ],
    providers: [
-      AuthService, ConfirmationDialogService
+      AuthService, ConfirmationDialogService , ToastrService
    ],
    bootstrap: [
       AppComponent

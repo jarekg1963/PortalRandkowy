@@ -1,9 +1,8 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ConfirmationDialogService } from '../alerty/confirmation-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
-
-declare let alertify: any;
 
 
 @Component({
@@ -18,31 +17,31 @@ export class RegisterComponent implements OnInit {
   model: any = {};
 
 
-  constructor(private authService: AuthService, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private toastr: ToastrService, private authService: AuthService,
+    private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
 
   }
 
-
   pytajOzapis() {
-    this.confirmationDialogService.confirm('','Czy jesteś pewien ? ', 'OK', 'Rezygnacja')
+    this.confirmationDialogService.confirm('', 'Czy jesteś pewien ? ', 'OK', 'Rezygnacja')
     .then((confirmed) => this.register(confirmed))
-    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-  }
-
-
+}
 
 
   register(dd: boolean) {
     console.log(dd);
     if (dd) {
     this.authService.registeracja(this.model).subscribe(() => {
-      this.confirmationDialogService.alertOkno('OK', 'Zapisano  ', '   OK   ');
+      this.toastr.success('Zapisano', 'OK');
     }, error => {
-      this.confirmationDialogService.alertOkno('Uwaga ', ' Błąd zapisu  ', '    OK    ');
+      this.toastr.error('Blad ', 'Blad');
     });
-  }
+
+}
+
+
   }
 
 

@@ -11,6 +11,7 @@ export class AuthService {
 baseUrl = 'http://localhost:5000/api/auth/';
 jwtHelper = new JwtHelperService();
 
+
 decodedToken: any;
 
 
@@ -32,6 +33,11 @@ login(model: any) {
 registeracja(model: any) {
 
   return this.http.post('http://localhost:5000/api/auth/register', model);
+}
+
+logedIn() {
+  const token = localStorage.getItem('token');
+  return !this.jwtHelper.isTokenExpired(token);
 }
 
 }
