@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
   model: any = {};
 
 
-  constructor(private authService: AuthService, private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(public authService: AuthService, private confirmationDialogService: ConfirmationDialogService) {}
 
   ngOnInit() {}
 
