@@ -15,6 +15,7 @@ import { ConfirmationDialogService } from './alerty/confirmation-dialog.service'
 import { AlertDialogComponent } from './alerty/alert-dialog/alert-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { UserService } from './_services/user.service';
 
 @NgModule({
    declarations: [
@@ -40,7 +41,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
       )
    ],
    providers: [
-      AuthService, ConfirmationDialogService , ToastrService
+      AuthService, ConfirmationDialogService , ToastrService, UserService
    ],
    bootstrap: [
       AppComponent
