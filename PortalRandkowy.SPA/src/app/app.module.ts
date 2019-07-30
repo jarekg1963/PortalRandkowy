@@ -1,3 +1,4 @@
+import { AuthGuard } from './_guards/auth.guard';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './_services/auth.service';
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TestComponent } from './test/test.component';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -38,7 +40,8 @@ export function tokenGetter(){
       AlertDialogComponent,
       UserListComponent,
       LikesComponent,
-      MessagesComponent
+      MessagesComponent,
+      TestComponent
    ],
    entryComponents: [ConfirmationDialogComponent,  AlertDialogComponent],
    imports: [
@@ -64,7 +67,8 @@ export function tokenGetter(){
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      AuthService, ConfirmationDialogService , ToastrService, UserService
+      AuthService, ConfirmationDialogService , ToastrService, UserService ,
+      AuthGuard
    ],
    bootstrap: [
       AppComponent
