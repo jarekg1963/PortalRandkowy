@@ -1,3 +1,4 @@
+import { UserListComponent } from './users/user-list/user-list.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,16 @@ import { AlertDialogComponent } from './alerty/alert-dialog/alert-dialog.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { UserService } from './_services/user.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { config } from 'rxjs';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
+import { LikesComponent } from './likes/likes.component';
+import { MessagesComponent } from './messages/messages.component';
+
+export function tokenGetter(){
+  return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -25,6 +36,9 @@ import { UserService } from './_services/user.service';
       RegisterComponent,
       ConfirmationDialogComponent,
       AlertDialogComponent,
+      UserListComponent,
+      LikesComponent,
+      MessagesComponent
    ],
    entryComponents: [ConfirmationDialogComponent,  AlertDialogComponent],
    imports: [
@@ -33,12 +47,21 @@ import { UserService } from './_services/user.service';
       FormsModule,
       NgbModule, NgbPaginationModule, NgbAlertModule,
       BrowserAnimationsModule,
+      JwtModule.forRoot({
+        config: {
+          tokenGetter,
+          whitelistedDomains: ['localhost:5000'],
+          blacklistedRoutes: ['localhost:5000/api/auth']
+        }
+        }
+      ),
       ToastrModule.forRoot(
         {
           timeOut: 1000,
           positionClass: 'toast-bottom-right'
         }
-      )
+      ),
+      RouterModule.forRoot(appRoutes)
    ],
    providers: [
       AuthService, ConfirmationDialogService , ToastrService, UserService

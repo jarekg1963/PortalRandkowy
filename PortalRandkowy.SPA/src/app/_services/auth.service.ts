@@ -9,7 +9,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 
 export class AuthService {
-baseUrl = environment.apiUrl + 'api/auth/';
+baseUrl = environment.apiUrl + 'auth/';
 jwtHelper = new JwtHelperService();
 decodeToken: any;
 
