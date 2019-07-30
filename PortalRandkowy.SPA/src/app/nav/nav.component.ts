@@ -1,6 +1,7 @@
 import { AuthService } from "./../_services/auth.service";
 import { Component, OnInit } from "@angular/core";
 import { ConfirmationDialogService } from '../alerty/confirmation-dialog.service';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +14,7 @@ export class NavComponent implements OnInit {
   model: any = {};
 
 
-  constructor(public authService: AuthService, private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(public authService: AuthService, private confirmationDialogService: ConfirmationDialogService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -27,17 +28,19 @@ export class NavComponent implements OnInit {
       error => {
       //  console.log("Wystąpił błąd logowania");
       this.confirmationDialogService.alertOkno('Błąd', 'Błąd logowania   ', '   OK   ');
-      }
+      },
+       () => { this.router.navigate(['/uzytkownicy'])}
     );
   }
 
   loggedIn() {
     return this.authService.logedIn();
+
   }
 
   logout() {
-    localStorage.removeItem("token");
-    console.log("zostałeś wylogowany ");
+    localStorage.removeItem('token');
+    this.router.navigate(['/home']);
   }
 
 
