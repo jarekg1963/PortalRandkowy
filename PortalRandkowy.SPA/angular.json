@@ -88,11 +88,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "./src/styles.scss"
             ],
             "scripts": [
-              "node_modules/alertifyjs/build/alertify.min.js"
+              "./node_modules/alertifyjs/build/alertify.min.js"
             ]
           }
         },
@@ -122,6 +121,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "PortalRandkowy-SPA"
 }

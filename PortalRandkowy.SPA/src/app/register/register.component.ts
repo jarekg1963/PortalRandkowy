@@ -1,7 +1,6 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ConfirmationDialogService } from '../alerty/confirmation-dialog.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrServiceService } from '../_services/toastrService.service';
 
 
 
@@ -17,29 +16,22 @@ export class RegisterComponent implements OnInit {
   model: any = {};
 
 
-  constructor(private toastr: ToastrService, private authService: AuthService,
-    private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private toastr: ToastrServiceService, private authService: AuthService,
+    ) { }
 
   ngOnInit() {
 
   }
 
-  pytajOzapis() {
-    this.confirmationDialogService.confirm('', 'Czy jesteś pewien ? ', 'OK', 'Rezygnacja')
-    .then((confirmed) => this.register(confirmed))
-}
 
 
-  register(dd: boolean) {
-    console.log(dd);
-    if (dd) {
+  register() {
     this.authService.registeracja(this.model).subscribe(() => {
-      this.toastr.success('Zapisano', 'OK');
+      this.toastr.showSuccess('Zapisano OK');
     }, error => {
-      this.toastr.error('Blad ', 'Blad');
+      this.toastr.showError('Blad rejestracji ');
     });
 
-}
 
 
   }

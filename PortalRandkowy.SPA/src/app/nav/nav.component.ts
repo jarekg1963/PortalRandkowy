@@ -1,7 +1,7 @@
-import { AuthService } from "./../_services/auth.service";
 import { Component, OnInit } from "@angular/core";
-import { ConfirmationDialogService } from '../alerty/confirmation-dialog.service';
 import { Router } from '@angular/router';
+import { ToastrServiceService } from '../_services/toastrService.service';
+import { AuthService } from '../_services/auth.service';
 
 
 
@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
   model: any = {};
 
 
-  constructor(public authService: AuthService, private confirmationDialogService: ConfirmationDialogService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router,  private toastr: ToastrServiceService) {}
 
   ngOnInit() {}
 
@@ -22,13 +22,13 @@ export class NavComponent implements OnInit {
     console.log(this.model);
     this.authService.login(this.model).subscribe(
       next => {
-       // console.log("Zalogowałeś sie do aplikacji");
-       this.confirmationDialogService.alertOkno('OK', 'Zalogowaleś sie do aplikacji  ', '   OK   ');
-      },
+
+this.toastr.showSuccess("Zalogowano pomyślnie ");
+    },
       error => {
-      //  console.log("Wystąpił błąd logowania");
-      this.confirmationDialogService.alertOkno('Błąd', 'Błąd logowania   ', '   OK   ');
-      },
+
+      this.toastr.showError('Błąd logowania ');
+    },
        () => { this.router.navigate(['/uzytkownicy'])}
     );
   }
@@ -41,6 +41,7 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/home']);
+    this.toastr.showSuccess('Wylogowano ');
   }
 
 

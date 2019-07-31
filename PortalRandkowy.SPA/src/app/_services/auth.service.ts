@@ -32,7 +32,6 @@ login(model: any) {
 }
 
 registeracja(model: any) {
-
   return this.http.post('http://localhost:5000/api/auth/register', model);
 }
 
