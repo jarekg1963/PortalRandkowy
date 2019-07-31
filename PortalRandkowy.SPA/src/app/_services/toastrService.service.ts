@@ -10,11 +10,15 @@ constructor(private toastr: ToastrService) { }
 
 
 public showSuccess(messageDisplay: string) {
-  this.toastr.success(messageDisplay);
+  this.toastr.success(messageDisplay,'OK',{
+    positionClass: 'toast-bottom-right'
+ });
 }
 
 public showError(messageDisplay: string) {
-  this.toastr.error(messageDisplay);
+  this.toastr.error(messageDisplay, 'Error', {
+    positionClass: 'toast-bottom-right'
+ });
 }
 
 }

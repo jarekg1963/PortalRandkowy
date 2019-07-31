@@ -24,6 +24,7 @@ import { appRoutes } from './routes';
 import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TestComponent } from './test/test.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 
 
@@ -59,7 +60,8 @@ export function tokenGetter(){
         }
       ),
       ToastrModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      BsDropdownModule.forRoot()
    ],
    providers: [
       AuthService, ToastrService, UserService ,
