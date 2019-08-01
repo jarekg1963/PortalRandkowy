@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -5,8 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Dtos;
-
-
 
 namespace PortalRandkowy.API.Controllers {
     [Authorize]
@@ -25,10 +24,19 @@ namespace PortalRandkowy.API.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> GetUsers () {
-            var users = await _repo.GetUsers ();
 
-            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
-            return Ok (usersToReturn);
+            try 
+            {
+                throw new Exception ("Reczny wyjatek w kontrolerze users");
+                var users = await _repo.GetUsers ();
+                var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>> (users);
+                return Ok (usersToReturn);
+
+            }
+             catch
+              {
+                return StatusCode (500, "Recznie wygenerowoany wyjatek ");
+            }
 
         }
 
@@ -36,7 +44,7 @@ namespace PortalRandkowy.API.Controllers {
         public async Task<IActionResult> GetUser (int id) {
             var user = await _repo.GetUser (id);
 
-            var userToReturn = _mapper.Map<UserForDetailsDto>(user);
+            var userToReturn = _mapper.Map<UserForDetailsDto> (user);
             return Ok (userToReturn);
         }
 
