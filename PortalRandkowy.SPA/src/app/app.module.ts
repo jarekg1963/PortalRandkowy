@@ -25,6 +25,8 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TestComponent } from './test/test.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { UserCardComponent } from './users/user-card/user-card.component';
 
 
 
@@ -42,7 +44,8 @@ export function tokenGetter(){
       UserListComponent,
       LikesComponent,
       MessagesComponent,
-      TestComponent
+      TestComponent,
+      UserCardComponent
    ],
    entryComponents: [],
    imports: [
@@ -65,7 +68,7 @@ export function tokenGetter(){
    ],
    providers: [
       AuthService, ToastrService, UserService ,
-      AuthGuard
+      AuthGuard, ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent
