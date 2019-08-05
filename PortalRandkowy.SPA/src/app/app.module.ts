@@ -1,3 +1,4 @@
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { CommonModule } from '@angular/common';
@@ -32,6 +33,7 @@ import { UserCardComponent } from './users/user-card/user-card.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 
 
@@ -51,7 +53,8 @@ export function tokenGetter(){
       MessagesComponent,
       TestComponent,
       UserCardComponent,
-      UserDetailComponent
+      UserDetailComponent,
+      UserEditComponent
    ],
    entryComponents: [],
    imports: [
@@ -77,7 +80,7 @@ export function tokenGetter(){
    ],
    providers: [
       AuthService, ToastrService, UserService ,
-      AuthGuard, ErrorInterceptorProvider, UserDetailResolver , UserListResolver
+      AuthGuard, ErrorInterceptorProvider, UserDetailResolver , UserListResolver, UserEditResolver
    ],
    bootstrap: [
       AppComponent
