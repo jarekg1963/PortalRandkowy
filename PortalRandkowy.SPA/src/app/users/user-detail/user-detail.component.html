@@ -1,9 +1,12 @@
 <div calss="container" mt-3>
   <div class="row">
+    <h1 class="nag"> Profil {{ user.username }}</h1>
+  </div>
+  <div class="row">
     <!-- lewa czesc ekranu  -->
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{ user?.photoUrl }}" alt="{{ user?.username }}">
+        <img class="card-img-top img-thumbnail" src="{{ user.photoUrl }}" alt="{{ user.username }}">
         <div class="card-body">
           <div>
             <strong> Znak zodiaku</strong>
@@ -109,11 +112,11 @@
               <h5> Najlepiej czuje sie w ..  </h5>
               <P> {{ user?.lookingFor}}</P>
           </tab>
-          <tab heading="Zdjęcia ">
-           <p> Tutaj będą zdjęcia </p>
+          <tab heading="Wiadomości">
+              <p> Tutaj będą wiadomosci  </p>
           </tab>
           <tab heading="Zdjęcia ">
-              <p> Tutaj będą wiadomosci  </p>
+              <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
              </tab>
         </tabset>
 

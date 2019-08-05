@@ -10,6 +10,8 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { NgxGalleryModule } from 'ngx-gallery';
+
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
@@ -69,7 +71,9 @@ export function tokenGetter(){
       ToastrModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       BsDropdownModule.forRoot(),
-      TabsModule.forRoot()
+      TabsModule.forRoot(),
+      NgxGalleryModule
+
    ],
    providers: [
       AuthService, ToastrService, UserService ,
