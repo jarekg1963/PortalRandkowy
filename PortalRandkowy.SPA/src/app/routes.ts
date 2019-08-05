@@ -1,3 +1,4 @@
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { AuthGuard } from "./_guards/auth.guard";
 import { HomeComponent } from "./home/home.component";
 import { Routes } from "@angular/router";
@@ -6,6 +7,7 @@ import { LikesComponent } from "./likes/likes.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { TestComponent } from "./test/test.component";
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,8 +16,8 @@ export const appRoutes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'uzytkownicy', component: UserListComponent },
-      { path: 'uzytkownicy/:id', component: UserDetailComponent },
+      { path: 'uzytkownicy', component: UserListComponent, resolve: {users: UserListResolver} } ,
+      { path: 'uzytkownicy/:id', component: UserDetailComponent, resolve: {user: UserDetailResolver} },
       { path: 'polubienia', component: LikesComponent },
       { path: 'wiadomosci', component: MessagesComponent },
       { path: 'testuj', component: TestComponent }

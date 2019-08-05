@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
@@ -10,20 +11,25 @@ import { UserService } from 'src/app/_services/user.service';
 export class UserListComponent implements OnInit {
 
   users: User[];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  this.loadUsers();
-  }
+ this.route.data.subscribe(data => {
+   this.users = data.users;
+ });
+}
 
-  loadUsers(){
 
-    this.userService.getUsers().subscribe((users: User[]) => {
-           this.users = users;
-           console.log(this.users);
-       }, error => {
-        console.log(error);
-    });
-  }
+
+
+//  loadUsers(){
+
+  //   this.userService.getUsers().subscribe((users: User[]) => {
+  //          this.users = users;
+  //          console.log(this.users);
+  //      }, error => {
+  //       console.log(error);
+  //   });
+  // }
 
 }
