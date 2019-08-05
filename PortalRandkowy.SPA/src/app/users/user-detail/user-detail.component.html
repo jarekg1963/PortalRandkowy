@@ -22,21 +22,102 @@
             <p> {{ user?.lastActive }}</p>
           </div>
           <div>
-              <strong> Użytkownik od </strong>
-              <p> {{ user?.created }}</p>
-            </div>
+            <strong> Użytkownik od </strong>
+            <p> {{ user?.created }}</p>
+          </div>
         </div>
-      <div class="card-footer">
-        <div class="btn-group d-flex">
-        <button class="btn btn-success w-100">Lubię</button>
-        <button class="btn btn-primary w-100">Wiadomości</button>
-      </div>
-      </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button class="btn btn-success w-100">Lubię</button>
+            <button class="btn btn-primary w-100">Wiadomości</button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- prawa czesc ekranu  -->
     <div class="col-sm-8">
-      Pozostałe dane użytkownika
+      <!-- Taby z bootsrapa  -->
+      <div class="tab-panel">
+        <tabset>
+          <tab heading="Informacje {{ user?.username }}">
+            <table style="width: 100%">
+              <tr>
+                <td style="width: 50%">
+                  <h5> Wzrost </h5>
+                  <P> {{ user?.growth}}</P>
+                <td style="width: 50%">
+                  <h5> Stan cywilny </h5>
+                  <P> {{ user?.martialStatus }}</P>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5> Kolor oczu </h5>
+                  <P> {{ user?.eyeColor}}</P>
+                <td>
+                  <h5> Wykształcenie </h5>
+                  <P> {{ user?.education }}</P>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5> Kolor włosów </h5>
+                  <P> {{ user?.hairColor}}</P>
+                <td>
+                  <h5> Zawód </h5>
+                  <P> {{ user?.profession }}</P>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5> Dzieci </h5>
+                  <P> {{ user?.children}}</P>
+                <td>
+                  <h5> Jezyki obce </h5>
+                  <P> {{ user?.languages }}</P>
+                </td>
+              </tr>
+            </table>
+          </tab>
+          <tab heading="O mnie">
+              <h5> Motto życiowe </h5>
+              <P> {{ user?.motto}}</P>
+              <h5> Opis </h5>
+              <P> {{ user?.description}}</P>
+              <h5> Osobowość </h5>
+              <P> {{ user?.personality}}</P>
+              <h5> Szukam  </h5>
+              <P> {{ user?.lookingFor}}</P>
+          </tab>
+          <tab heading="Zainteresowania">
+              <h5> Zainteresowania </h5>
+              <P> {{ user?.motto}}</P>
+              <h5> Opis </h5>
+              <P> {{ user?.description}}</P>
+              <h5> Osobowość </h5>
+              <P> {{ user?.personality}}</P>
+              <h5> Szukam  </h5>
+              <P> {{ user?.lookingFor}}</P>
+          </tab>
+          <tab heading="Preferencje">
+              <h5> Lubię </h5>
+              <P> {{ user?.motto}}</P>
+              <h5> Nie lubię </h5>
+              <P> {{ user?.description}}</P>
+              <h5> Rozśniesza mnie </h5>
+              <P> {{ user?.personality}}</P>
+              <h5> Najlepiej czuje sie w ..  </h5>
+              <P> {{ user?.lookingFor}}</P>
+          </tab>
+          <tab heading="Zdjęcia ">
+           <p> Tutaj będą zdjęcia </p>
+          </tab>
+          <tab heading="Zdjęcia ">
+              <p> Tutaj będą wiadomosci  </p>
+             </tab>
+        </tabset>
+
+      </div>
     </div>
   </div>
 </div>
