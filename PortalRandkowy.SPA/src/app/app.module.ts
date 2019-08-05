@@ -27,6 +27,7 @@ import { TestComponent } from './test/test.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserCardComponent } from './users/user-card/user-card.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 
 
@@ -45,7 +46,8 @@ export function tokenGetter(){
       LikesComponent,
       MessagesComponent,
       TestComponent,
-      UserCardComponent
+      UserCardComponent,
+      UserDetailComponent
    ],
    entryComponents: [],
    imports: [
