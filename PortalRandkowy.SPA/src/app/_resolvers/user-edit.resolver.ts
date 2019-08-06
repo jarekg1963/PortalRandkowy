@@ -3,17 +3,18 @@ import {Injectable} from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
-import { ToastrService } from 'ngx-toastr';
+
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class UserEditResolver implements Resolve<User> {
 
     constructor(private userService: UserService,
                 private router: Router,
-                private toastr: ToastrService ,
+                private toastr: ToastrService,
                 private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
@@ -26,4 +27,5 @@ export class UserEditResolver implements Resolve<User> {
         );
     }
 }
+
 
