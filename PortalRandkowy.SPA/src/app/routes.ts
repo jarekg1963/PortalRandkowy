@@ -11,6 +11,7 @@ import { TestComponent } from "./test/test.component";
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { Component } from '@angular/core';
+import { PreventUnsevedChanges } from './_guards/prevent-unsaved-changes';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,9 @@ export const appRoutes: Routes = [
     children: [
       { path: 'uzytkownicy', component: UserListComponent, resolve: {users: UserListResolver} } ,
       { path: 'uzytkownicy/:id', component: UserDetailComponent, resolve: {user: UserDetailResolver} },
-      { path: 'uzytkownik/edycja' , component:  UserEditComponent, resolve: { user: UserEditResolver}},
+      { path: 'uzytkownik/edycja' , component:  UserEditComponent,
+                                    resolve: { user: UserEditResolver },
+                                  canDeactivate: [PreventUnsevedChanges]},
       { path: 'polubienia', component: LikesComponent },
       { path: 'wiadomosci', component: MessagesComponent },
       { path: 'testuj', component: TestComponent }

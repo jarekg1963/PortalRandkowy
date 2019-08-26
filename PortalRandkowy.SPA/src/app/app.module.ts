@@ -1,3 +1,4 @@
+import { PreventUnsevedChanges } from './_guards/prevent-unsaved-changes';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserListComponent } from './users/user-list/user-list.component';
@@ -80,7 +81,8 @@ export function tokenGetter(){
    ],
    providers: [
       AuthService, ToastrService, UserService ,
-      AuthGuard, ErrorInterceptorProvider, UserDetailResolver , UserListResolver, UserEditResolver
+      AuthGuard, ErrorInterceptorProvider, UserDetailResolver , UserListResolver, UserEditResolver,
+      PreventUnsevedChanges
    ],
    bootstrap: [
       AppComponent
