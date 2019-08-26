@@ -1,16 +1,15 @@
-<div calss="container" mt-3>
+ <div calss="container" mt-3>
   <div class="row">
     <div class="col-sm-4">
         <h1 class="nag"> Twój profil edycja </h1>
     </div>
     <div class="col-sm-8">
-      <div class="alert alert-info" >
+      <div *ngIf="editform.dirty" class="alert alert-info" >
 <p><strong>Informacja: </strong> Dokonałeś zmian . Niezapisane zmiany zostaną utracone </p>
       </div>
     </div>
   </div>
   <div class="row">
-    <!-- lewa czesc ekranu  -->
     <div class="col-sm-4">
       <div class="card">
         <img class="card-img-top img-thumbnail" src="{{ user.photoUrl }}" alt="{{ user.username }}">
@@ -37,16 +36,13 @@
           </div>
         </div>
         <div class="card-footer">
-
-            <button class="btn btn-success btn-block">Zapisz zmiany</button>
-
+            <button [disabled]="!editform.dirty" form="editform" class="btn btn-success btn-block">Zapisz zmiany</button>
         </div>
       </div>
     </div>
-    <!-- prawa czesc ekranu  -->
+
     <div class="col-sm-8">
-      <form>
-        <!-- Taby z bootsrapa  -->
+      <form #editform="ngForm" id="editform" (ngSubmit)="updateUser()">
         <div class="tab-panel">
           <tabset class="user-tabset">
             <tab heading="Informacje - edycja">
@@ -111,7 +107,6 @@
             </tab>
             <tab heading="Zainteresowania">
               <h5> Zainteresowania </h5>
-
               <textarea class="form-control" name="motto" rows="4" [(ngModel)]="user.motto"></textarea>
               <h5> Opis </h5>
               <textarea class="form-control" name="description" rows="4" [(ngModel)]="user.description"></textarea>

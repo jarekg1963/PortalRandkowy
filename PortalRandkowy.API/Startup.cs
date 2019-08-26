@@ -50,6 +50,8 @@ namespace PortalRandkowy.API {
                     ValidateAudience = false
                     };
                 });
+                 // Register the Swagger services
+    services.AddSwaggerDocument();
 
         }
 
@@ -78,6 +80,9 @@ namespace PortalRandkowy.API {
                 });
             }
 
+ // Register the Swagger generator and the Swagger UI middlewares
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
             // app.UseHttpsRedirection();
             seeder.SeedUsers ();
             app.UseCors (x => x.AllowAnyOrigin ().AllowAnyHeader ().AllowAnyMethod ());

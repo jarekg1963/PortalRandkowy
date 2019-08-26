@@ -11,7 +11,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthService {
 baseUrl = environment.apiUrl + 'auth/';
 jwtHelper = new JwtHelperService();
-decodeToken: any;
+// decodeToken: any;
 
 decodedToken: any;
 
@@ -25,7 +25,7 @@ login(model: any) {
       if (user) {
         localStorage.setItem('token', user.token);
         this.decodedToken = this.jwtHelper.decodeToken(user.token);
-        console.log(this.decodedToken);
+
       }
     })
     );
