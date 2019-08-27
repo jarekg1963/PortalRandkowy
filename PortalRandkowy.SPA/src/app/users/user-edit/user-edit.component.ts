@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { ActivatedRoute } from "@angular/router";
 import {
   Component,
@@ -9,6 +10,7 @@ import {
 import { User } from "src/app/_models/user";
 import { ToastrServiceService } from "src/app/_services/toastrService.service";
 import { NgForm } from "@angular/forms";
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: "app-user-edit",
@@ -29,7 +31,9 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private alert: ToastrServiceService
+    private alert: ToastrServiceService,
+    private userService: UserService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -40,7 +44,12 @@ export class UserEditComponent implements OnInit {
 
   updateUser() {
     console.log(this.user);
-    this.alert.showSuccess("Zapisano !!!!");
-    this.editform.reset(this.user);  // instrukcja do odswierzenia po zapisaniu potrzeba @ViewChild
-  }
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
+    .subscribe(next => {
+      this.alert.showSuccess("Zapisano pomyslnie");
+      this.editform.reset(this.user);
+    }, error => {
+      this.alert.showError("Błąd zapisu ")
+    });
+    }
 }
