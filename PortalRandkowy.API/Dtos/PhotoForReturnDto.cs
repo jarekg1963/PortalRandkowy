@@ -14,6 +14,6 @@ namespace PortalRandkowy.API.Dtos
 
         public bool IsMain { get; set; }            // Czy zdjęcie jest główne
 
-        public string  PublicId  { get; set; }
+        public string  public_Id  { get; set; }
     }
 }

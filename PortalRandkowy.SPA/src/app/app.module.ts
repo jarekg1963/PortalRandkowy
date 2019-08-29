@@ -1,3 +1,4 @@
+import { PhotosComponent } from './users/photos/photos.component';
 import { PreventUnsevedChanges } from './_guards/prevent-unsaved-changes';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -38,6 +39,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 
 
+
 export function tokenGetter(){
   return localStorage.getItem('token');
 }
@@ -48,14 +50,14 @@ export function tokenGetter(){
       NavComponent,
       HomeComponent,
       RegisterComponent,
-
       UserListComponent,
       LikesComponent,
       MessagesComponent,
       TestComponent,
       UserCardComponent,
       UserDetailComponent,
-      UserEditComponent
+      UserEditComponent,
+      PhotosComponent
    ],
    entryComponents: [],
    imports: [
@@ -86,6 +88,8 @@ export function tokenGetter(){
    ],
    bootstrap: [
       AppComponent
-   ]
+   ],
+   exports: [
+]
 })
 export class AppModule { }
