@@ -7,7 +7,7 @@ import { Routes } from "@angular/router";
 import { UserListComponent } from "./users/user-list/user-list.component";
 import { LikesComponent } from "./likes/likes.component";
 import { MessagesComponent } from "./messages/messages.component";
-import { TestComponent } from "./test/test.component";
+
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { Component } from '@angular/core';
@@ -26,8 +26,8 @@ export const appRoutes: Routes = [
                                     resolve: { user: UserEditResolver },
                                   canDeactivate: [PreventUnsevedChanges]},
       { path: 'polubienia', component: LikesComponent },
-      { path: 'wiadomosci', component: MessagesComponent },
-      { path: 'testuj', component: TestComponent }
+      { path: 'wiadomosci', component: MessagesComponent }
+
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }

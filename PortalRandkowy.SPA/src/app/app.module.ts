@@ -3,7 +3,7 @@ import { PreventUnsevedChanges } from './_guards/prevent-unsaved-changes';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserListComponent } from './users/user-list/user-list.component';
-import { CommonModule } from '@angular/common';
+
 import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,7 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { UserService } from './_services/user.service';
 import { JwtModule } from '@auth0/angular-jwt';
-import { config } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { LikesComponent } from './likes/likes.component';
@@ -36,6 +35,7 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -64,6 +64,7 @@ export function tokenGetter(){
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      FileUploadModule,
       NgbModule, NgbPaginationModule, NgbAlertModule,
       BrowserAnimationsModule,
       JwtModule.forRoot({
