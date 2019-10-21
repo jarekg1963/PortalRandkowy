@@ -52,4 +52,9 @@ export class UserEditComponent implements OnInit {
       this.alert.showError("Błąd zapisu ")
     });
     }
+
+
+    updateMainPhoto(photoUrl){
+      this.user.photoUrl = photoUrl;
+    }
 }
