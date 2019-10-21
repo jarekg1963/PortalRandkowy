@@ -12,11 +12,11 @@ namespace PortalRandkowy.API.Models
 
         public DateTime DateAdded { get; set; }     // Data dodania
 
-        public bool IsMain { get; set; }   
+        public Boolean IsMain { get; set; }   
         
         public string public_id { get; set; }         // Czy zdjęcie jest główne
 
-        public User User { get; set; }
+     //   public User User { get; set; }
 
         public int UserId { get; set; }
 

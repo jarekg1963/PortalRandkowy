@@ -95,7 +95,7 @@ namespace PortalRandkowy.API.Controllers
 
 
 
-         [HttpPost("{id}/setMain")]
+        [HttpPost("{id}/setMain")]
         public async Task<IActionResult> SetMainPhoto(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
