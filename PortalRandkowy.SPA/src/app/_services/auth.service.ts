@@ -16,17 +16,16 @@ baseUrl = environment.apiUrl + 'auth/';
 jwtHelper = new JwtHelperService();
 decodedToken: any;
 currentUser: User;
+
 photoUrl = new BehaviorSubject<string>('../../assets/user.png');
 currentPhotoUrl = this.photoUrl.asObservable();
 
 
+
 constructor(private http: HttpClient) { }
 
-
 changeUserPhoto(photoUrl: string) {
-
   this.photoUrl.next(photoUrl);
-
 }
 
 
@@ -39,6 +38,7 @@ login(model: any) {
         localStorage.setItem('user', JSON.stringify(user.user));
         this.decodedToken = this.jwtHelper.decodeToken(user.token);
         this.currentUser = user.user;
+        this.changeUserPhoto(this.currentUser.photoUrl);
       }
     })
     );

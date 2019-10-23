@@ -4,7 +4,7 @@ import { AuthService } from "./../../_services/auth.service";
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { FileUploader } from "ng2-file-upload";
-import { ToastrServiceService } from 'src/app/_services/toastrService.service';
+import { ToastrServiceService } from "src/app/_services/toastrService.service";
 
 @Component({
   selector: "app-photos",
@@ -66,19 +66,25 @@ export class PhotosComponent implements OnInit {
     };
   }
 
-
   setMainPhoto(photo: Photo) {
-
-
-    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
-      console.log("sukces");
-      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
-      this.currentMain.isMain = false;
-      photo.isMain = true;
-      this.getUserPhotoChange.emit(photo.url);
-    }, error => {
-    this.alert.showError(error);
-  });
-}
-
+    this.userService
+      .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
+      .subscribe(
+        () => {
+          console.log("sukces");
+          this.currentMain = this.photos.filter(p => p.isMain === true)[0];
+          this.currentMain.isMain = false;
+          photo.isMain = true;
+          this.authService.changeUserPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem(
+            "user",
+            JSON.stringify(this.authService.currentUser)
+          );
+        },
+        error => {
+          this.alert.showError(error);
+        }
+      );
+  }
 }

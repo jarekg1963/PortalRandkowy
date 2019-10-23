@@ -11,6 +11,7 @@ import { AuthService } from "../_services/auth.service";
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  photoUrl: string;
 
   constructor(
     public authService: AuthService,
@@ -18,7 +19,10 @@ export class NavComponent implements OnInit {
     private toastr: ToastrServiceService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = this.photoUrl);
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+  }
 
   login() {
     console.log(this.model);

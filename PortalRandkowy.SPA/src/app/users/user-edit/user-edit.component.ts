@@ -1,4 +1,4 @@
-import { AuthService } from './../../_services/auth.service';
+import { AuthService } from "./../../_services/auth.service";
 import { ActivatedRoute } from "@angular/router";
 import {
   Component,
@@ -10,7 +10,7 @@ import {
 import { User } from "src/app/_models/user";
 import { ToastrServiceService } from "src/app/_services/toastrService.service";
 import { NgForm } from "@angular/forms";
-import { UserService } from 'src/app/_services/user.service';
+import { UserService } from "src/app/_services/user.service";
 
 @Component({
   selector: "app-user-edit",
@@ -19,15 +19,15 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class UserEditComponent implements OnInit {
   user: User;
-  @ViewChild('editform', { static: false }) editform: NgForm;
-  @HostListener('window:beforeunload', ['$event'])
+  photoUrl: string;
+
+  @ViewChild("editform", { static: false }) editform: NgForm;
+  @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {
     if (this.editform.dirty) {
       $event.returnValue = true;
     }
   }
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -40,21 +40,25 @@ export class UserEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {
     console.log(this.user);
-    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
-    .subscribe(next => {
-      this.alert.showSuccess("Zapisano pomyslnie");
-      this.editform.reset(this.user);
-    }, error => {
-      this.alert.showError("Błąd zapisu ")
-    });
-    }
+    this.userService
+      .updateUser(this.authService.decodedToken.nameid, this.user)
+      .subscribe(
+        next => {
+          this.alert.showSuccess("Zapisano pomyslnie");
+          this.editform.reset(this.user);
+        },
+        error => {
+          this.alert.showError("Błąd zapisu ");
+        }
+      );
+  }
 
-
-    updateMainPhoto(photoUrl){
-      this.user.photoUrl = photoUrl;
-    }
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+  }
 }
