@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -63,6 +63,7 @@ export function tokenGetter(){
    imports: [
       BrowserModule,
       HttpClientModule,
+      ReactiveFormsModule,
       FormsModule,
       FileUploadModule,
       NgbModule, NgbPaginationModule, NgbAlertModule,

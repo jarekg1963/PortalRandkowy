@@ -7,13 +7,13 @@
        [ngClass]="photo.isMain ? 'btn-sucess active' : 'btn-info'"
        [disabled]="photo.isMain">Główne </button>
 
-       <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> </button>
+       <button type="button" class="btn btn-sm btn-danger"
+       [disabled]="photo.isMain"
+        (click)="deletePhoto(photo.id)" ><i class="fa fa-trash-o"></i> </button>
     </div>
   </div>
 </div>
-
 <div class="row mt-3">
-
   <div class="col-md-3">
     <h3>Wybierz plik</h3>
     <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"

@@ -87,4 +87,13 @@ export class PhotosComponent implements OnInit {
         }
       );
   }
+
+  deletePhoto(id: number){
+    this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
+      this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+      console.log('Zdjecie zostało usunięte');
+    }, error => {
+      console.log('Nie udało się usunąć zdjęcia');
+    });
+  }
 }
