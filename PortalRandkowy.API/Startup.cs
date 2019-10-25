@@ -19,54 +19,65 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Helpers;
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace PortalRandkowy.API {
-    public class Startup {
-        public Startup (IConfiguration configuration) {
+
+namespace PortalRandkowy.API
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
-            services.AddDbContext<DataContext> (x => x.UseSqlite (Configuration.GetConnectionString ("DefaultConnection")));
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2)
-                .AddJsonOptions (opt => {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt =>
+                {
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
-            services.AddCors ();
+            services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
-            services.AddAutoMapper ();
-            services.AddTransient<Seed> ();
-            services.AddScoped<IAuthRepository, AuthRepository> ();
-            services.AddScoped<IGenericRepository, GenericRepository> ();
-            services.AddScoped<IUserRepository, UserRepository> ();
-            services.AddAuthentication (JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer (options => {
-                    options.TokenValidationParameters = new TokenValidationParameters {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey (System.Text.Encoding.ASCII.GetBytes (Configuration.GetSection ("AppSettings:Token").Value)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+            services.AddAutoMapper();
+            services.AddTransient<Seed>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
                     };
                 });
-                 // Register the Swagger services
-    services.AddSwaggerDocument();
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My First API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env, Seed seeder) {
-           if (env.IsDevelopment())
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        {
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler(builder => 
+                app.UseExceptionHandler(builder =>
                 {
-                    builder.Run(async context => 
+                    builder.Run(async context =>
                     {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
@@ -81,14 +92,16 @@ namespace PortalRandkowy.API {
                 });
             }
 
- // Register the Swagger generator and the Swagger UI middlewares
-    app.UseOpenApi();
-    app.UseSwaggerUi3();
-            // app.UseHttpsRedirection();
-            seeder.SeedUsers ();
-            app.UseCors (x => x.AllowAnyOrigin ().AllowAnyHeader ().AllowAnyMethod ());
-            app.UseAuthentication ();
-            app.UseMvc (); // ta linia musi być na koncu . Korzystamy z routingu na atrybutach . 
+            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My First API");
+            });
+
+            seeder.SeedUsers();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseAuthentication();
+            app.UseMvc(); // ta linia musi być na koncu . Korzystamy z routingu na atrybutach . 
         }
     }
 }
