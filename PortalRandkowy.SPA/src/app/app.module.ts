@@ -28,7 +28,7 @@ import { appRoutes } from './routes';
 import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TestComponent } from './test/test.component';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserCardComponent } from './users/user-card/user-card.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
@@ -66,6 +66,8 @@ export function tokenGetter(){
       ReactiveFormsModule,
       FormsModule,
       FileUploadModule,
+      BrowserAnimationsModule,
+      BsDatepickerModule.forRoot(),
       NgbModule, NgbPaginationModule, NgbAlertModule,
       BrowserAnimationsModule,
       JwtModule.forRoot({

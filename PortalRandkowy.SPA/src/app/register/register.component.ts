@@ -1,7 +1,13 @@
 import { AuthService } from "./../_services/auth.service";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ToastrServiceService } from "../_services/toastrService.service";
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { BsDatepickerConfig } from "ngx-bootstrap";
 
 @Component({
   selector: "app-register",
@@ -16,6 +22,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
+  bsConfig: Partial<BsDatepickerConfig>;
+
   constructor(
     private toastr: ToastrServiceService,
     private authService: AuthService,
@@ -24,6 +32,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
 
+    this.bsConfig = {
+      containerClass: "theme-red"
+    },
     this.createRegisterForm();
 
     // this.registerForm = new FormGroup({
@@ -33,22 +44,34 @@ export class RegisterComponent implements OnInit {
     // },this.passwordMatchValidator);
   }
 
-createRegisterForm() {
-  this.registerForm = this.fb.group({
+  createRegisterForm() {
+    this.registerForm = this.fb.group(
+      {
+        username: ["", Validators.required],
+        password: [
+          "",
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(10)
+          ]
+        ],
+        confirmPassword: ["", Validators.required],
+        gender: ["female"],
+        dateOfBirth: [null, Validators.required],
+        zodiacSign: ["", Validators.required],
+        city: ["", Validators.required],
+        country: ["", Validators.required]
+      },
+      { validator: this.passwordMatchValidator }
+    );
+  }
 
-    username: ['', Validators.required],
-
-    password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
-
-    confirmPassword: ['', Validators.required]
-
-  }, {validator: this.passwordMatchValidator});
-}
-
-passwordMatchValidator(fg: FormControl){
-  return fg.get('password').value === fg.get('confirmPassword').value ? null : { mismatch: true };
-
-}
+  passwordMatchValidator(fg: FormControl) {
+    return fg.get("password").value === fg.get("confirmPassword").value
+      ? null
+      : { mismatch: true };
+  }
 
   register() {
     console.log(this.registerForm.value);
