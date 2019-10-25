@@ -1,7 +1,7 @@
 import { AuthService } from "./../_services/auth.service";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { ToastrServiceService } from "../_services/toastrService.service";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-register",
@@ -18,16 +18,32 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private toastr: ToastrServiceService,
-    private authService: AuthService
+    private authService: AuthService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10) ]),
-      confirmPassword: new FormControl('', Validators.required)
-    },this.passwordMatchValidator);
+
+    this.createRegisterForm();
+
+    // this.registerForm = new FormGroup({
+    //   username: new FormControl('', Validators.required),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10) ]),
+    //   confirmPassword: new FormControl('', Validators.required)
+    // },this.passwordMatchValidator);
   }
+
+createRegisterForm() {
+  this.registerForm = this.fb.group({
+
+    username: ['', Validators.required],
+
+    password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+
+    confirmPassword: ['', Validators.required]
+
+  }, {validator: this.passwordMatchValidator});
+}
 
 passwordMatchValidator(fg: FormControl){
   return fg.get('password').value === fg.get('confirmPassword').value ? null : { mismatch: true };
