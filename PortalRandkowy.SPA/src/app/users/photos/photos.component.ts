@@ -97,3 +97,6 @@ export class PhotosComponent implements OnInit {
     });
   }
 }
+
+
+// Tomek modyfikacje
